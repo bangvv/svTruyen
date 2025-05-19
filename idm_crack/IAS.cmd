@@ -5,14 +5,7 @@
 
 
 ::============================================================================
-::
-::   IDM Activation Script (IAS)
-::
-::   Homepages: https://github.com/WindowsAddict/IDM-Activation-Script
-::              https://massgrave.dev/idm-activation-script
-::
-::       Email: windowsaddict@protonmail.com
-::
+
 ::============================================================================
 
 
@@ -267,30 +260,6 @@ if defined quedit goto :skipQE
 
 ::  Check for updates
 
-set -=
-set old=
-
-for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 iasupdatecheck.mass%-%grave.dev') do (
-if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%iasver%" %nul1% || set old=1))
-)
-
-if defined old (
-echo ________________________________________________
-%eline%
-echo You are running outdated version IAS %iasver%
-echo ________________________________________________
-echo:
-if not %_unattended%==1 (
-echo [1] Get Latest IAS
-echo [0] Continue Anyway
-echo:
-call :_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
-choice /C:10 /N
-if !errorlevel!==2 rem
-if !errorlevel!==1 (start https://github.com/WindowsAddict/IDM-Activation-Script & start %mas%/idm-activation-script & exit /b)
-)
-)
-
 ::========================================================================================================================================
 
 cls
@@ -419,7 +388,6 @@ choice /C:123450 /N
 set _erl=%errorlevel%
 
 if %_erl%==6 exit /b
-if %_erl%==5 start https://github.com/WindowsAddict/IDM-Activation-Script & start https://massgrave.dev/idm-activation-script & goto MainMenu
 if %_erl%==4 start https://www.internetdownloadmanager.com/download.html & goto MainMenu
 if %_erl%==3 goto _reset
 if %_erl%==2 (set frz=0&goto :_activate)
